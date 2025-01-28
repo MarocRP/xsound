@@ -6,7 +6,6 @@ function Distance(name_, distance_)
     })
     soundInfo[name_].distance = distance_
 end
-
 exports('Distance', Distance)
 
 function Position(name_, pos)
@@ -20,7 +19,6 @@ function Position(name_, pos)
     soundInfo[name_].position = pos
     soundInfo[name_].id = name_
 end
-
 exports('Position', Position)
 
 function Destroy(name_)
@@ -29,13 +27,13 @@ function Destroy(name_)
         name = name_
     })
     soundInfo[name_] = nil
-
     if globalOptionsCache[name_] ~= nil and globalOptionsCache[name_].onPlayEnd ~= nil then
         globalOptionsCache[name_].onPlayEnd(getInfo(name_))
     end
 
     globalOptionsCache[name_] = nil
 end
+exports('Destroy', Destroy)
 
 function DestroySilent(name)
     SendNUIMessage({
@@ -43,9 +41,6 @@ function DestroySilent(name)
         name = name
     })
 end
-
-
-exports('Destroy', Destroy)
 
 function Resume(name_)
     SendNUIMessage({
@@ -59,7 +54,6 @@ function Resume(name_)
         globalOptionsCache[name_].onPlayResume(getInfo(name_))
     end
 end
-
 exports('Resume', Resume)
 
 function Pause(name_)
@@ -74,7 +68,6 @@ function Pause(name_)
         globalOptionsCache[name_].onPlayPause(getInfo(name_))
     end
 end
-
 exports('Pause', Pause)
 
 function setVolume(name_, vol)
@@ -85,7 +78,6 @@ function setVolume(name_, vol)
     })
     soundInfo[name_].volume = vol
 end
-
 exports('setVolume', setVolume)
 
 function setVolumeMax(name_, vol)
@@ -96,7 +88,6 @@ function setVolumeMax(name_, vol)
     })
     soundInfo[name_].volume = vol
 end
-
 exports('setVolumeMax', setVolumeMax)
 
 function setTimeStamp(name_, timestamp)
@@ -107,13 +98,11 @@ function setTimeStamp(name_, timestamp)
         timestamp = timestamp,
     })
 end
-
 exports('setTimeStamp', setTimeStamp)
 
 function destroyOnFinish(id, bool)
     soundInfo[id].destroyOnFinish = bool
 end
-
 exports('destroyOnFinish', destroyOnFinish)
 
 function setSoundLoop(name, value)
@@ -124,7 +113,6 @@ function setSoundLoop(name, value)
     })
     soundInfo[name].loop = value
 end
-
 exports('setSoundLoop', setSoundLoop)
 
 function repeatSound(name)
@@ -135,7 +123,6 @@ function repeatSound(name)
         })
     end
 end
-
 exports('repeatSound', repeatSound)
 
 function setSoundDynamic(name, bool)
@@ -148,7 +135,6 @@ function setSoundDynamic(name, bool)
         })
     end
 end
-
 exports('setSoundDynamic', setSoundDynamic)
 
 function setSoundURL(name, url)
@@ -161,5 +147,4 @@ function setSoundURL(name, url)
         })
     end
 end
-
 exports('setSoundURL', setSoundURL)

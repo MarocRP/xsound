@@ -1,21 +1,18 @@
 function fadeIn(name, time, volume_)
     if soundExists(name) then
         volumeType(name, 0)
-
         local addVolume = (volume_ / time) * 100
         local called = 0
         local volume = volume_
-
         while true do
             volume = volume - addVolume
             if volume < 0 then volume = 0 end
             if volume == 0 then break end
             called = called + 1
         end
-
         volume = getVolume(name)
         while true do
-            Citizen.Wait(time / called)
+            Wait(time / called)
             volume = volume + addVolume
             if volume > volume_ then
                 volume = volume_
@@ -26,26 +23,22 @@ function fadeIn(name, time, volume_)
         end
     end
 end
-
 exports('fadeIn', fadeIn)
 
 function fadeOut(name, time)
     if soundExists(name) then
         local volume = getVolume(name)
-
         local addVolume = (volume / time) * 100
         local called = 0
-
         while true do
             volume = volume - addVolume
             if volume < 0 then volume = 0 end
             if volume == 0 then break end
             called = called + 1
         end
-
         volume = getVolume(name)
         while true do
-            Citizen.Wait(time / called)
+            Wait(time / called)
             volume = volume - addVolume
             if volume < 0 then
                 volume = 0
@@ -56,7 +49,6 @@ function fadeOut(name, time)
         end
     end
 end
-
 exports('fadeOut', fadeOut)
 
 function volumeType(name, volume)

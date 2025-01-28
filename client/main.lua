@@ -20,9 +20,8 @@ function getDefaultInfo()
 end
 
 function UpdatePlayerPositionInNUI()
-    local ped = PlayerPedId()
+    local ped = cache.ped
     local pos = GetEntityCoords(ped)
-
     SendNUIMessage({
         status = "position",
         x = pos.x,
@@ -32,7 +31,7 @@ function UpdatePlayerPositionInNUI()
 end
 
 function CheckForCloseMusic()
-    local ped = PlayerPedId()
+    local ped = cache.ped
     local playerPos = GetEntityCoords(ped)
     isPlayerCloseToMusic = false
     for k, v in pairs(soundInfo) do
@@ -48,22 +47,20 @@ end
 -- updating position on html side so we can count how much volume the sound needs.
 CreateThread(function()
     local refresh = config.RefreshTime
-    local ped = PlayerPedId()
+    local ped = cache.ped
     local pos = GetEntityCoords(ped)
     local lastPos = pos
     local changedPosition = false
     while true do
         Wait(refresh)
         if not disableMusic and isPlayerCloseToMusic then
-            ped = PlayerPedId()
+            ped = cache.ped
             pos = GetEntityCoords(ped)
-
             -- we will update position only when player have moved
             if #(lastPos - pos) >= 0.1 then
                 lastPos = pos
                 UpdatePlayerPositionInNUI()
             end
-
             if changedPosition then
                 UpdatePlayerPositionInNUI()
                 SendNUIMessage({ status = "unmuteAll" })
@@ -91,7 +88,6 @@ end)
 -- updating timeStamp
 CreateThread(function()
     Wait(1100)
-
     while true do
         Wait(1000)
         for k, v in pairs(soundInfo) do
@@ -111,7 +107,6 @@ function PlayMusicFromCache(data)
     if musicCache then
         musicCache.SkipEvents = true
         musicCache.SkipTimeStamp = true
-
         PlayUrlPosSilent(data.id, data.url, data.volume, data.position, data.loop)
         onPlayStartSilent(data.id, function()
             if getInfo(data.id).maxDuration then
@@ -124,12 +119,12 @@ end
 
 -- If player is far away from music we will just delete it.
 CreateThread(function()
-    local ped = PlayerPedId()
+    local ped = cache.ped
     local playerPos = GetEntityCoords(ped)
     local destroyedMusicList = {}
     while true do
         Wait(500)
-        ped = PlayerPedId()
+        ped = cache.ped
         playerPos = GetEntityCoords(ped)
         for k, v in pairs(soundInfo) do
             if v.position ~= nil and v.isDynamic then

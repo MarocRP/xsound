@@ -3,7 +3,6 @@ RegisterNUICallback("init", function(data, cb)
         status = "init",
         time = config.RefreshTime,
     })
-
     if cb then cb('ok') end
 end)
 
@@ -20,11 +19,9 @@ RegisterNUICallback("data_status", function(data, cb)
                 soundInfo[data.id].timeStamp = 0
             end
             soundInfo[data.id].maxDuration = data.time
-
             soundInfo[data.id].SkipTimeStamp = nil
         end
     end
-
     if cb then cb('ok') end
 end)
 
@@ -79,65 +76,53 @@ end)
 
 RegisterNetEvent("xsound:stateSound", function(state, data)
     local soundId = data.soundId
-
     if state == "destroyOnFinish" then
         if soundExists(soundId) then
             destroyOnFinish(soundId, data.value)
         end
     end
-
     if state == "timestamp" then
         if soundExists(soundId) then
             setTimeStamp(soundId, data.time)
         end
     end
-
     if state == "texttospeech" then
         TextToSpeech(soundId, data.lang, data.url, data.volume, data.loop or false)
     end
-
     if state == "texttospeechpos" then
         TextToSpeechPos(soundId, data.lang, data.url, data.volume, data.position, data.loop or false)
     end
-
     if state == "play" then
         PlayUrl(soundId, data.url, data.volume, data.loop or false)
     end
-
     if state == "playpos" then
         PlayUrlPos(soundId, data.url, data.volume, data.position, data.loop or false)
     end
-
     if state == "position" then
         if soundExists(soundId) then
             Position(soundId, data.position)
         end
     end
-
     if state == "distance" then
         if soundExists(soundId) then
             Distance(soundId, data.distance)
         end
     end
-
     if state == "destroy" then
         if soundExists(soundId) then
             Destroy(soundId)
         end
     end
-
     if state == "pause" then
         if soundExists(soundId) then
             Pause(soundId)
         end
     end
-
     if state == "resume" then
         if soundExists(soundId) then
             Resume(soundId)
         end
     end
-
     if state == "volume" then
         if soundExists(soundId) then
             if isDynamic(soundId) then

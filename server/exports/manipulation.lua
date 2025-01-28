@@ -4,7 +4,6 @@ function Position(source, name_, pos)
         position = pos,
     })
 end
-
 exports('Position', Position)
 
 function Distance(source, name_, distance_)
@@ -13,7 +12,6 @@ function Distance(source, name_, distance_)
         distance = distance_,
     })
 end
-
 exports('Distance', Distance)
 
 function Destroy(source, name_)
@@ -21,7 +19,6 @@ function Destroy(source, name_)
         soundId = name_,
     })
 end
-
 exports('Destroy', Destroy)
 
 function Pause(source, name_)
@@ -29,7 +26,6 @@ function Pause(source, name_)
         soundId = name_,
     })
 end
-
 exports('Pause', Pause)
 
 function Resume(source, name_)
@@ -37,7 +33,6 @@ function Resume(source, name_)
         soundId = name_,
     })
 end
-
 exports('Resume', Resume)
 
 function setVolume(source, name_, vol)
@@ -46,7 +41,6 @@ function setVolume(source, name_, vol)
         volume = vol,
     })
 end
-
 exports('setVolume', setVolume)
 
 function setTimeStamp(source, name_, time_)
@@ -55,7 +49,6 @@ function setTimeStamp(source, name_, time_)
         time = time_
     })
 end
-
 exports('setTimeStamp', setTimeStamp)
 
 function destroyOnFinish(id, bool)
@@ -64,5 +57,4 @@ function destroyOnFinish(id, bool)
         value = bool
     })
 end
-
 exports('destroyOnFinish', destroyOnFinish)
