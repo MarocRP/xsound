@@ -24,6 +24,7 @@ function PlayUrl(name_, url_, volume_, loop_, options)
         y = 0,
         z = 0,
         dynamic = false,
+        hasMaxTime = false,
         volume = volume_,
         loop = loop_ or false,
     })
@@ -54,6 +55,7 @@ function PlayUrlPos(name_, url_, volume_, pos, loop_, options)
         y = pos.y,
         z = pos.z,
         dynamic = true,
+        hasMaxTime = false,
         volume = volume_,
         loop = loop_ or false,
     })
@@ -74,6 +76,7 @@ function PlayUrlPosSilent(name_, url_, volume_, pos, loop_)
         x = pos.x,
         y = pos.y,
         z = pos.z,
+        hasMaxTime = soundInfo[name_].hasMaxTime or false,
         dynamic = true,
         volume = volume_,
         loop = loop_ or false,

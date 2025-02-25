@@ -61,6 +61,7 @@ function Pause(name_)
         status = "pause",
         name = name_
     })
+
     soundInfo[name_].playing = false
     soundInfo[name_].paused = true
 
@@ -142,6 +143,7 @@ function setSoundURL(name, url)
         soundInfo[name].url = url
         SendNUIMessage({
             status = "changeurl",
+            hasMaxTime = false,
             name = name,
             url = url,
         })
